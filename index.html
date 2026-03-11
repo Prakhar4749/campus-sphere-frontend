@@ -5,9 +5,26 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      var global = window;
-      var process = { env: {} };
-      var exports = {};
+      (function() {
+        console.log("[Diagnostic] Initializing production shims...");
+        try {
+          window.global = window;
+          window.process = { 
+            env: { NODE_ENV: 'production' },
+            browser: true,
+            version: '',
+            nextTick: function(fn) { setTimeout(fn, 0); }
+          };
+          window.exports = {};
+          console.log("[Diagnostic] Shims initialized successfully:", {
+            global: !!window.global,
+            process: !!window.process,
+            Request: typeof Request !== 'undefined'
+          });
+        } catch (e) {
+          console.error("[Diagnostic] Failed to initialize shims:", e);
+        }
+      })();
     </script>
     <title>Campus Sphere - University Portal</title>
   </head>
