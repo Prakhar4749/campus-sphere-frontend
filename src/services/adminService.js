@@ -4,13 +4,13 @@ const adminService = {
   // Public: Fetch Colleges for registration dropdown
   getColleges: () => {
     console.info('[AdminService] Fetching all colleges');
-    return axiosInstance.get('/admin/colleges');
+    return axiosInstance.get('/admin/public/colleges');
   },
 
   // Public: Fetch Departments based on selected college
   getDepartments: (collegeId) => {
     console.info(`[AdminService] Fetching departments for collegeId: ${collegeId}`);
-    return axiosInstance.get(`/admin/departments/${collegeId}`);
+    return axiosInstance.get(`/admin/public/departments/${collegeId}`);
   },
 
   // Secured: Get HOD Details
